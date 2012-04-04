@@ -1,42 +1,30 @@
 header.jumbotron
-    div.inner
-        div.container
-            h1(style="letter-spacing:-3px; margin-bottom:20px;")
-            p.leadAn 
-                strong intro 
-                |to using the Nodify App Template
-                br
-                |including information on the 
-                strong Shopify API 
-                | and 
-                strong Bootstrap,
-                br
-                |just to get the ball rolling.
 
 div.row
     div.span3
         div.well
             h3 Check out the / route
             hr(style="margin:2px 0 7px")
-            p The controller in this demo application fetches the newest 5 orders and products and makes them available as local
+            p The controller in this demo app fetches the newest 5 orders and 3 products. It makes them available as local
              variables 
                 code orders 
                 |and 
                 code products
             ul
                 li
-                    a(href="http://www.shopify.com/developers/api/") API documentation 
+                    a(href="http://www.shopify.com/developers/api/", target="blank") API documentation 
                     span.note Learn what you can do with the Shopify API
                 br
                 li
-                    a(href="http://twitter.github.com/bootstrap/") Bootstrap documentation 
+                    a(href="http://twitter.github.com/bootstrap/", target="blank") Bootstrap documentation 
                     span.note Find out what you can do with Twitter Bootstrap
                 br
                 li
-                    a(href="http://wiki.shopify.com/") Wiki 
+                    a(href="http://wiki.shopify.com/", target="blank") Wiki 
                     span.note Get more information and share your knowledge
+                br
                 li
-                    a(href="http://forums.shopify.com/community") Forum 
+                    a(href="http://forums.shopify.com/community", target="blank") Forum 
                     span.note Ask questions and see what others already wanted to know
             hr
 
@@ -46,7 +34,7 @@ div.row
             table.table.table-striped
                 tr
                     td
-                        em  There are no orders in your store
+                        em  Glups, you don't have any orders yet!
         - else 
             table.table.table-striped
                 thead
@@ -80,7 +68,7 @@ div.row
             - if (typeof(products[0]) == 'undefined')
                 div.accordion-group
                     div.accordion-heading
-                        em There are no products in your store.
+                        em Glups, you don't have any product to be shown!
             - else
                 - each product, i in products
                     div.accordion-group
