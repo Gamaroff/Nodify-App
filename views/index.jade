@@ -1,0 +1,142 @@
+header.jumbotron
+    div.inner
+        div.container
+            h1(style="letter-spacing:-3px; margin-bottom:20px;")
+            p.leadAn 
+                strong intro 
+                |to using the Nodify App Template
+                br
+                |including information on the 
+                strong Shopify API 
+                | and 
+                strong Bootstrap,
+                br
+                |just to get the ball rolling.
+
+div.row
+    div.span3
+        div.well
+            h3 Check out the / route
+            hr(style="margin:2px 0 7px")
+            p The controller in this demo application fetches the newest 5 orders and products and makes them available as local
+             variables 
+                code orders 
+                |and 
+                code products
+            ul
+                li
+                    a(href="http://www.shopify.com/developers/api/") API documentation 
+                    span.note Learn what you can do with the Shopify API
+                br
+                li
+                    a(href="http://twitter.github.com/bootstrap/") Bootstrap documentation 
+                    span.note Find out what you can do with Twitter Bootstrap
+                br
+                li
+                    a(href="http://wiki.shopify.com/") Wiki 
+                    span.note Get more information and share your knowledge
+                li
+                    a(href="http://forums.shopify.com/community") Forum 
+                    span.note Ask questions and see what others already wanted to know
+            hr
+
+    div.span8.offset1
+        h2 Recent Orders
+        - if (typeof(orders[0]) == 'undefined')
+            table.table.table-striped
+                tr
+                    td
+                        em  There are no orders in your store
+        - else 
+            table.table.table-striped
+                thead
+                    tr
+                        th Order
+                        th Placed by
+                        th Paid
+                        th Fulfillment
+                        th Total
+                - each order in orders
+                    tr
+                        td
+                            a(href="##{order.id}", target="blank")= order.name
+                        td= order.billing_address.name
+                        td
+                            - if( order.financial_status  == 'paid' )
+                                span.label.label-success = order.financial_status
+                            - else if(order.financial_status  == 'pending')
+                                span.label.label-warning = order.financial_status
+                            - else
+                                span.label.label-important= order.financial_status
+                        td
+                            - if(!order.fulfillment_status)
+                                span.label Not Fulfilled
+                            - else 
+                                span.label.label-success Fulfilled
+                        td #{order.total_price} #{order.currency}
+        br
+        h2 New Products
+            div.accordion#accordion     
+            - if (typeof(products[0]) == 'undefined')
+                div.accordion-group
+                    div.accordion-heading
+                        em There are no products in your store.
+            - else
+                - each product, i in products
+                    div.accordion-group
+                        div.accordion-heading
+                        a.accordion-toggle(data-toggle="collapse", data-parent="#accordion", href="##{product.id}")
+                            |#{product.title} 
+                            span.pull-right.muted #{product.price_range} 
+                    - if (i == 1)            
+                        div(id="#{product.id}", class="accordion-body collapse in")
+                            div.accordion-inner
+                            - if(product.images)
+                                - if(product.images.first)
+                                    div.polaroid
+                                    a(href="#modal-#{product.id}", data-toggle="modal")
+                                            img(src="#{product.images.first.medium}")
+
+                            p
+                                strong Type: 
+                                | #{product.product_type}
+  
+                            p !{product.body_html}
+                            
+                            br
+
+                            div(id="#modal-#{product.id}", class="modal hide fade", style="display:none")
+                                div.modal-header
+                                    a.close(data-dismiss="modal") ×
+                                    h3=product.title
+                                div.modal-body
+                    - else
+                        div(id="#{product.id}", class="accordion-body collapse")
+                            div.accordion-inner
+                            - if(product.images)
+                                - if(product.images.first)
+                                    div.polaroid
+                                    a(href="#modal-#{product.id}", data-toggle="modal")
+                                            img(src="#{product.images.first.medium}")
+
+                            p
+                                strong Type: 
+                                | #{product.product_type}
+                
+                             p !{product.body_html}
+                            
+                            br
+
+                        div(id="#modal-#{product.id}", class="modal hide fade", style="display:none")
+                            div.modal-header
+                                a.close(data-dismiss="modal") ×
+                                h3=product.title
+                            div.modal-body
+
+                      
+
+
+            
+                
+     
+

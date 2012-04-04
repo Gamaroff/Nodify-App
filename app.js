@@ -32,9 +32,6 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-shop_name = "hand-ratke-and-green2603";
-token_id = '';
-
 // Routes
 app.get('/', function(req, res) {
 	var shop = undefined, token = undefined;
@@ -48,14 +45,17 @@ app.get('/', function(req, res) {
 		session = nodify.createSession(shop, token, config.apiKey, config.secret);
 
 		if(session.valid()){
-			product = {
-				  "product": {
-				    "body_html": "<strong>YAY!</strong>",	
-				  }   
-			};      
-			session.product.all(function(err, data){
-				if(err) { console.log(data); throw err;}
-				res.send(data);
+
+			session.order.all(function(err, orders){
+				if(err) { console.log(orders); throw err;}
+
+				session.product.all(function(err, products){
+					if(err) { console.log(products); throw err;}
+
+					res.render("index", {title: "Nodify App", orders: orders, products: products});
+
+				});
+
 			});
 		}
 	}
@@ -67,23 +67,47 @@ app.get('/', function(req, res) {
 
 
 app.get('/login', function(req, res) {
+	try {
+		shop = res.body.shop;
+	}
+	catch(error) {
+		shop = undefined;
+	}
 
-	session = nodify.createSession(shop_name, token_id, config.apiKey, config.secret);
-	if(session.valid())
-	{
-		if(token_id === '') {
-			res.redirect(session.createPermissionUrl());
+	if(res.body != undefined) {
+		//redirect to auth
+	}
+	else{
+		res.render("login", {title: "Nodify App"});
+	}
+});
+
+app.post('/login/authenticate', function(req, res) {
+	try {
+		token = req.session.shopify.t;
+	}
+	catch(error) {
+		token = '';
+	}
+	if(req.body.shop != null && req.body.shop != undefined) {	
+		session = nodify.createSession(req.body.shop, token, config.apiKey, config.secret);
+		if(session.valid())
+		{
+			if(token === '') {
+				res.redirect(session.createPermissionUrl());
+			}
+			else{
+				res.redirect('/');
+			}
 		}
 		else{
-			res.redirect('/');
+			res.redirect('/login');
 		}
 	}
 	else{
-		res.send("Could not log in");
+		res.redirect('/login');
 	}
-
 });
-
 
 app.get('/login/finalize', function(req, res) {
 	params = req.query;

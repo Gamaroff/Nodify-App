@@ -1,6 +1,27 @@
-!!!
+doctype 5
 html
   head
     title= title
+    meta(name="viewport", content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/twitter.css')
+    link(rel='stylesheet', href='/stylesheets/imports.css')
+    link(rel='stylesheet', href='/stylesheets/shopify.css')
+    link(rel='stylesheet', href='/stylesheets/shopify_buttons.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+    script(type="text/javascript", src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
+    script(type="text/javascript", src="/javascripts/bootstrap.js")
+    link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Open+Sans")
+  body
+    div.navbar.navbar-fixed-top
+        div.navbar-inner
+            div.container
+                a(class="btn btn-navbar", data-toggle="collapse", data-target=".nav-callapse")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a(href="/", class="brand") Nodify Demo App
+
+    div.container
+        div.content!= body
+        footer
+            p A Shopify app by (company name here)
