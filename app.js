@@ -8,7 +8,7 @@ var express = require('express')
 var app = module.exports = express.createServer();
 var config = require ('./config.json');
 var nodify = require('nodify');
-
+ 
 
 
 // Configuration
@@ -46,10 +46,10 @@ app.get('/', function(req, res) {
 
 		if(session.valid()){
 
-			session.order.all(function(err, orders){
+			session.order.all({limit: 5}, function(err, orders){
 				if(err) { console.log(orders); throw err;}
 
-				session.product.all(function(err, products){
+				session.product.all({limit: 3}, function(err, products){
 					if(err) { console.log(products); throw err;}
 
 					res.render("index", {title: "Nodify App", orders: orders, products: products});
@@ -74,8 +74,9 @@ app.get('/login', function(req, res) {
 		shop = undefined;
 	}
 
-	if(res.body != undefined) {
+	if(shop != undefined) {
 		//redirect to auth
+		res.redirect("/login/authenticate");
 	}
 	else{
 		res.render("login", {title: "Nodify App"});
