@@ -75,56 +75,27 @@ div.row
                         div.accordion-heading
                         a.accordion-toggle(data-toggle="collapse", data-parent="#accordion", href="##{product.id}")
                             |#{product.title} 
-                            span.pull-right.muted #{product.price_range} 
-                    - if (i == 1)            
-                        div(id="#{product.id}", class="accordion-body collapse in")
-                            div.accordion-inner
-                            - if(product.images)
-                                - if(product.images.first)
-                                    div.polaroid
-                                    a(href="#modal-#{product.id}", data-toggle="modal")
-                                            img(src="#{product.images.first.medium}")
+                            span.pull-right.muted #{product.price_range}          
+                    div(id="#{product.id}", class="accordion-body collapse")
+                        div.accordion-inner
+                        - if(product.images)
+                            - if(product.images.first)
+                                div.polaroid
+                                a(href="#modal-#{product.id}", data-toggle="modal")
+                                        img(src="#{product.images.first.medium}")
 
-                            p
-                                strong Type: 
-                                | #{product.product_type}
-  
-                            p !{product.body_html}
-                            
-                            br
+                        p
+                            strong Type: 
+                            | #{product.product_type}
 
-                            div(id="#modal-#{product.id}", class="modal hide fade", style="display:none")
-                                div.modal-header
-                                    a.close(data-dismiss="modal") ×
-                                    h3=product.title
-                                div.modal-body
-                    - else
-                        div(id="#{product.id}", class="accordion-body collapse")
-                            div.accordion-inner
-                            - if(product.images)
-                                - if(product.images.first)
-                                    div.polaroid
-                                    a(href="#modal-#{product.id}", data-toggle="modal")
-                                            img(src="#{product.images.first.medium}")
-
-                            p
-                                strong Type: 
-                                | #{product.product_type}
-                
-                             p !{product.body_html}
-                            
-                            br
+                        p !{product.body_html}
+                        
+                        br
 
                         div(id="#modal-#{product.id}", class="modal hide fade", style="display:none")
                             div.modal-header
                                 a.close(data-dismiss="modal") ×
                                 h3=product.title
                             div.modal-body
-
-                      
-
-
-            
-                
      
 

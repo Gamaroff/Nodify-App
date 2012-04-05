@@ -7,7 +7,7 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 var config = require ('./config.json');
-var nodify = require('nodify');
+var nodify = require('nodify-shopify');
  
 
 
@@ -49,10 +49,10 @@ app.get('/', function(req, res) {
 			session.order.all({limit: 5}, function(err, orders){
 				if(err) { console.log(orders); throw err;}
 
-				session.product.all({limit: 3}, function(err, products){
+				session.product.all({limit: 5}, function(err, products){
 					if(err) { console.log(products); throw err;}
 
-					res.render("index", {title: "Nodify App", orders: orders, products: products});
+					res.render("index", {title: "Nodify App", current_shop: shop , orders: orders, products: products});
 
 				});
 
@@ -122,6 +122,14 @@ app.get('/login/finalize', function(req, res) {
 	}
 	
 	
+});
+
+
+app.get('/logout', function(req, res) {	
+	if(req.session.shopify){
+		req.session.shopify = null;
+	}	
+	res.redirect('/');
 });
 
 app.listen(3000);
