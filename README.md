@@ -1,2 +1,2 @@
-Nodify Reference guide
+Nodify Sample App # Node.js connector for the Shopify API [![Build Status](https://secure.travis-ci.org/Shopfrogs/Nodify-App.png?branch=master)](http://travis-ci.org/Shopfrogs/Nodify-App)
 ======================
