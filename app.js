@@ -77,6 +77,8 @@ app.get('/', function(req, res) {
 
 
 app.get('/login', function(req, res) {
+	
+
 	try {
 		shop = res.body.shop;
 	}
@@ -84,7 +86,10 @@ app.get('/login', function(req, res) {
 		shop = undefined;
 	}
 
-	if(shop != undefined) {
+	if(req.session.shopify){
+		res.redirect("/");
+	}
+	else if(shop != undefined) {
 		//redirect to auth
 		res.redirect("/login/authenticate");
 	}
