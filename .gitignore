@@ -46,3 +46,4 @@ node_modules
 # Enviroment specific files #
 #####################
 config.json
+.env

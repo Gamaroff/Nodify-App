@@ -6,10 +6,20 @@ var express = require('express')
   , routes = require('./routes')
 
 var app = module.exports = express.createServer();
-var config = require ('./config.json');
 var nodify = require('nodify-shopify');
  
+var apiKey, secret; 
 
+//If Heroku or Foreman
+ if(process.env.SHOPIFY_API_KEY != undefined && process.env.SHOPIFY_SECRET != undefined){
+ 	apiKey = process.env.SHOPIFY_API_KEY;
+ 	secret = process.env.SHOPIFY_SECRET;
+}
+else {
+	var config = require ('./config.json');
+	apiKey = config.apiKey;
+ 	secret = config.secret;
+}
 
 // Configuration
 
@@ -42,7 +52,7 @@ app.get('/', function(req, res) {
 	}
 
 	if(shop !== undefined && token !== undefined) {
-		session = nodify.createSession(shop, token, config.apiKey, config.secret);
+		session = nodify.createSession(shop, token, apiKey, secret);
 
 		if(session.valid()){
 
@@ -91,7 +101,7 @@ app.post('/login/authenticate', function(req, res) {
 		token = '';
 	}
 	if(req.body.shop != null && req.body.shop != undefined) {	
-		session = nodify.createSession(req.body.shop, token, config.apiKey, config.secret);
+		session = nodify.createSession(req.body.shop, token, apiKey, secret);
 		if(session.valid())
 		{
 			if(token === '') {
@@ -113,7 +123,7 @@ app.post('/login/authenticate', function(req, res) {
 app.get('/login/finalize', function(req, res) {
 	params = req.query;
 	req.session.shopify = params;
-	session = nodify.createSession(req.query.shop, params.t, config.apiKey, config.secret, params);
+	session = nodify.createSession(req.query.shop, params.t, apiKey, secret, params);
 	if(session.valid()){
 		res.redirect("/");
 	}
