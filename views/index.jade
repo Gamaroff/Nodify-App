@@ -45,7 +45,7 @@ div.row
                     tr
                         th Order
                         th Placed by
-                        th Paid
+                        th Payment status
                         th Fulfillment
                         th Total
                 - each order in orders
@@ -55,11 +55,11 @@ div.row
                         td= order.billing_address.name
                         td
                             - if( order.financial_status  == 'paid' )
-                                span.label.label-success = order.financial_status
+                                span.label.label-success = paid
                             - else if(order.financial_status  == 'pending')
-                                span.label.label-warning = order.financial_status
+                                span.label.label-warning = pending
                             - else
-                                span.label.label-important= order.financial_status
+                                span.label.label-important= other financial status
                         td
                             - if(!order.fulfillment_status)
                                 span.label Not Fulfilled
