@@ -55,9 +55,9 @@ div.row
                         td= order.billing_address.name
                         td
                             - if( order.financial_status  == 'paid' )
-                                span.label.label-success = paid
+                                span.label.label-success Paid
                             - else if(order.financial_status  == 'pending')
-                                span.label.label-warning = pending
+                                span.label.label-warning Pending
                             - else
                                 span.label.label-important = other financial status
                         td
