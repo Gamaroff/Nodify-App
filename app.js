@@ -147,6 +147,36 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+
+app.get('/plans', function(req, res) {	
+	if(req.session.shopify){
+		token = req.session.shopify.t
+		shop = req.session.shopify.shop
+	}
+
+	if(shop !== undefined && token !== undefined) {
+		res.render("plans", {title: "Nodify App Plans", current_shop: shop});
+	}
+	else {
+		res.redirect('/login');
+	}
+});
+
+
+app.get('/faq', function(req, res) {	
+	if(req.session.shopify){
+		token = req.session.shopify.t
+		shop = req.session.shopify.shop
+	}
+
+	if(shop !== undefined && token !== undefined) {
+		res.render("faq", {title: "Nodify App FAQ", current_shop: shop});
+	}
+	else {
+		res.redirect('/login');
+	}
+});
+
 var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
