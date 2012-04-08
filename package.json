@@ -1,21 +1,21 @@
 {
-    "name": "nodify_sample_app"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.5.5"
-    , "jade": ">= 0.0.1"
-	, "nodify-shopify": "0.1.0"
-  }
-  ,"scripts": {
-    "test": "cake test"
-  }
-  , "engines": {
-  	 "node": "0.6.x"
-  }
-  , "devDependencies": {
-    "mocha": "0.12.x",
-    "should": "0.5.x",
-    "coffee-script": "1.2.x"
-  }
+    "name": "nodify_sample_app",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "2.5.5",
+        "jade": ">= 0.0.1",
+        "nodify-shopify": "0.1.0"
+    },
+    "scripts": {
+        "test": "cake test"
+    },
+    "engines": {
+        "node": "0.6.x"
+    },
+    "devDependencies": {
+        "mocha": "0.12.x",
+        "should": "0.5.x",
+        "coffee-script": "1.2.x"
+    }
 }
