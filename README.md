@@ -7,8 +7,15 @@ This is a Shopify App using Nodify-Shopify module. This app provides the layout 
 
     git clone git@github.com:Shopfrogs/Nodify-App.git
     cd Nodify-App
+    npm install -d
+    
    
-Open xx file and declare your API key and Shared Secret. 
+Create a config.json file and declare your API key and Shared Secret. 
+	
+	{
+		"apiKey": "YOUR-API-KEY",
+		"secret": "YOUR-SHARED-SECRET"
+	}
 
 If you don't have the API key and Shared Secret yet, sign up for a [Shopify Partner account](https://app.shopify.com/services/partners/signup/), and create your first app. You can also create test stores
 once you're logged in as a partner.
@@ -18,7 +25,7 @@ When you create your app in the Shopify Partner Account, set the return URL to
 
 Start your local application: 
 
-    node 
+    node app.js
 
 Head over to: http://localhost:3000 and enter the url of your Shopify store.
 
