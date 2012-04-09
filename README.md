@@ -27,7 +27,7 @@ Start your local application:
 
     node app.js
 
-Head over to: http://localhost:3000 and enter the url of your Shopify store.
+Head over to: <tt>localhost:3000</tt> and enter the url of your Shopify store.
 
 After your application has been given read or read/write API permission by your Shopify store, you're ready to see how Nodify works. It's time to tweak it!
 
